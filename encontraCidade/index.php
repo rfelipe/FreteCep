@@ -1,8 +1,5 @@
 <?php
 
-$arquivo = 'entrada.txt';
-$cep = null;
-
 function organizaArquivoCidades($arquivo) {
     $linhas = file($arquivo, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     $faixas = [];
@@ -13,7 +10,6 @@ function organizaArquivoCidades($arquivo) {
             $proximaLinhaEhOCep = true;
             continue;
         }
-
         if (isset($proximaLinhaEhOCep) && $proximaLinhaEhOCep) {
             $cep = (int)trim($linha);
             break;
@@ -27,12 +23,12 @@ function organizaArquivoCidades($arquivo) {
         ];
     }
 
-    return $faixas;
+    return [$faixas, $cep];
 }
 
 function procurarCidade() {
 
-    $faixas =  organizaArquivoCidades($arquivo);
+    list($faixas, $cep) =  organizaArquivoCidades('data/entrada.txt');
 
     foreach ($faixas as $faixa) {
         if ($cep >= $faixa['inicio'] && $cep <= $faixa['fim']) {
