@@ -61,7 +61,7 @@ function construirGrafo($conexoes) {
 
     foreach ($conexoes as $conexao) {
         $grafo[$conexao['origem']][$conexao['destino']] = $conexao['custo'];
-        $grafo[$conexao['destino']][$conexao['origem']] = $conexao['custo']; // bidirecional
+        $grafo[$conexao['destino']][$conexao['origem']] = $conexao['custo'];
     }
 
     return $grafo;
@@ -97,7 +97,6 @@ function dijkstra($grafo, $inicio, $fim) {
         unset($distancia[$cidadeAtual]);
     }
 
-    // reconstruir caminho
     $rota = [];
     $cidade = $fim;
     while ($cidade !== null) {
